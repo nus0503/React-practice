@@ -1,5 +1,9 @@
 <!DOCTYPE html>
 <html lang="en">
+<head>
+    
+    <title>Document</title>
+</head>
 <body>
     <div id="root"></div>
 </body>
@@ -8,20 +12,21 @@
 <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
 <script type="text/babel">
     const root = document.getElementById("root");
-    
-    function App() {
-        const [counter, setCounter] = React.useState(0);
-        const onClick = () => {
-            // setCounter(counter + 1);
-            setCounter((current2) => current2 + 1);
+
+    function App() 
+    {
+        const [counter, set] = React.useState(0);
+        function count() {
+            set(counter + 1);
         };
         return (
             <div>
-                <h3>Total clicks: {counter}</h3>
-                <button onClick={onClick}>Click me</button>
+                <h3>Total clicks : {counter}</h3>
+                <button onClick={count}>Click Me</button>
             </div>
         );
     };
+    
 
     ReactDOM.render(<App />, root);
 </script>
