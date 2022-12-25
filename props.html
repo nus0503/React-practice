@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="root"></div>
+</body>
+<script src="https://unpkg.com/react@17.0.2/umd/react.development.js"></script>
+<script src="https://unpkg.com/react-dom@17.0.2/umd/react-dom.development.js"></script>
+<script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+<script type="text/babel">
+    function Btn( {text, changeValue} ) {            //app 컴포넌트에서 불어온 properties를 Btn인자에 넣어진다. 그래서 props 인자로 받는데 이 인자는 오브젝트로 만들어져 있다.
+        console.log(text, "was redered");           // 그래서 직접 오브젝트로(props) 사용할 땐 "props.속성키값" 으로 부른다. 혹은 인자를 properties를 바로 불러 올 수 있다.
+        return (                        // function Btn(props) { <button>{props.properties}<button> }; 혹은 function Btn(properties) { <button>{properties}<button> };
+            <button 
+                onClick={changeValue}
+                style={{
+                backgroundColor : "tomato",
+                color : "white",
+                padding : "10px 20px",
+                border : 0,
+                borderRadius : 10,
+                fontSize : 16
+            }}>
+            {text}
+            </button>
+        );
+    };
+    const MemorizedBtn = React.memo(Btn); // 어떤 컴포넌트가 React.memo()로 매핑 될 때, React는 그 컴포넌트를 렌더링하고 결과를 암기(memorizing)한다. 그리고 다음 렌더링이 일어날 때
+    function App() {                      // props가 같다면, React는 암기(memorizing)된 내용을 재사용한다.
+        const [value, setValue] = React.useState("Save Changes");
+        const changeValue = () => setValue("Revert Changes");
+        return (
+            <div>
+                <MemorizedBtn text={value} changeValue={changeValue} />
+                <MemorizedBtn text="Continue"  />
+            </div>
+        );
+    };
+    ReactDOM.render(<App />, root);
+</script>
+</html>
