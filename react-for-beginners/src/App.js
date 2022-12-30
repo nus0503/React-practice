@@ -1,5 +1,6 @@
-import { useState, useEffect } from "react";
-import Movie from "./components/Movie";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import Detail from './routes/Detail';
+import Home from './routes/Home';
 /* ------------------- about EFFECT--------------------------------------------
 // function App() {
 //   const [counter, setValue] = useState(0);
@@ -130,6 +131,13 @@ function App() {
 -----------------------------------------------------------END-------------------------------------------------------- */
 
 function App() {
-  return null;
+  return (
+    <Router>
+      <Routes>
+        <Route path='movie' element={<Detail />}></Route>
+        <Route path='/' element={<Home />}></Route>
+      </Routes>
+    </Router>
+  );
 };
 export default App;
