@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import Movie from "./components/Movie";
 /* ------------------- about EFFECT--------------------------------------------
 // function App() {
 //   const [counter, setValue] = useState(0);
@@ -127,4 +128,8 @@ function App() {
   );
 };
 -----------------------------------------------------------END-------------------------------------------------------- */
+
+function App() {
+  return null;
+};
 export default App;
