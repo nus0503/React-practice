@@ -57,6 +57,8 @@ function App() {
   );
 };
 ----------------------------------------END---------------------------------------------------- */
+
+/* ----------------------------------about To Do List---------------------------------------- 
 function App() {
   const [toDo, setToDo] = useState("");
   const [toDos, setToDos] = useState([]);
@@ -84,4 +86,45 @@ function App() {
     </div>
   );
 };
+---------------------------------------END-------------------------------------------------------- */
+
+/* ------------------------------------about coin tracker---------------------------------------
+function App() {
+  const [loading, setLoading] = useState(true);
+  const [coins, setCoins] = useState([]);
+  const [value, setValue] = useState(0);
+  const [coinValue, setCoinValue] = useState(1);
+  const onChange = (event) => {
+    setValue(event.target.value);
+    console.log(value);
+  };
+  const selectOption = (event) => {
+    setCoinValue(event.target.value);
+  };
+  useEffect(() => {
+    fetch("https://api.coinpaprika.com/v1/tickers")
+      .then((response) => response.json())
+      .then((json) => {
+        setCoins(json);
+        setLoading(false);
+      });
+  }, []);
+  return (
+    <div>
+      <h1>The Coins! {loading ? "" : `(${coins.length})`}</h1>
+      {loading ? (
+      <strong>Loading...</strong>
+      ) : (
+      <select onChange={selectOption}>
+        {coins.map((coin) => (
+        <option value={coin.quotes.USD.price} key={coin.id}>{coin.name} ({coin.symbol}) : ${coin.quotes.USD.price} USD</option>
+        ))}
+      </select>
+      )}
+      <input onChange={onChange} value={value} style={{display : "block"}} type="number" />
+      <div>살 수 있는 가격은 : {value / coinValue}</div>
+    </div>
+  );
+};
+-----------------------------------------------------------END-------------------------------------------------------- */
 export default App;
